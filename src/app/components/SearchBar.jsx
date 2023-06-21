@@ -1,5 +1,12 @@
-export default function SearchBar(){
+export default function SearchBar({title}){
     return (
-        <input name="searchbar"></input>
+        <div className="p-2">
+            <label htmlFor="">{title}</label>
+            <input 
+            name="searchbar" 
+            className="form-control rounded block" 
+            placeholder="Masukan nama musik"
+            type="text"/>
+        </div>
     )
 }

@@ -1,11 +1,12 @@
-export default function MusicList(){
+export default function MusicList({title, songs}){
     return(
-        <div className="bg-black text-white">
-            <h3>Music List</h3>
+        <div className="p-12 text-white bg-slate-700 h-96">
+            <h3 className="text-white">{title}</h3>
             <ul>
-                <li>Music 1</li>
-                <li>Music 2</li>
-                <li>Music 3</li>
+                {songs.map((song, index)=>(
+                    <li>{index+1}.{song.name}</li>
+                ))}
+
             </ul>
         </div>
     )
