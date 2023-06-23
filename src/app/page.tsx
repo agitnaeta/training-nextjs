@@ -14,8 +14,8 @@ export default function Home(){
   const [activeSong, setActiveSong] = useState();
 
   return (
-    <div className="grid grid-rows-3 grid-flow-col gap-0">
-      <div className="row-span-3">
+    <div className="grid grid-cols-4">
+      <div className="col-span-1">
         <MusicList 
           setText={setText} 
           text={text} 
@@ -23,15 +23,20 @@ export default function Home(){
           setActiveSong={setActiveSong}
           songs={songs}/>
       </div>
-      <div className="col-span-6">
-        <SearchBar 
-          setText={setText} 
-          text={text} 
-          setSongs = {setSongs}
-          title={info.find_music}/>
-      </div>
-      <div className="row-span-2 col-span-6">
-        <MediaPlayer text={text} activeSong={activeSong}/>
+      <div className='col-span-3'>
+        <div className='grid-rows-12 grid'>
+          <div className='row-span-1 bg-slate-700'>
+            <SearchBar 
+              setText={setText} 
+              text={text} 
+              setSongs = {setSongs}
+              title={info.find_music}/>
+          </div>
+          <div className='row-span-auto'>
+            <MediaPlayer text={text} activeSong={activeSong}/>
+          </div>
+        </div>
+       
       </div>
     </div>
   )

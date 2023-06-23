@@ -18,14 +18,14 @@ export default function SearchBar({title,text, setText, setSongs}){
     return (
         <div className="p-2 flex">
             <input
-            onKeyUp={handleTyping}
-            name="searchbar" 
-            className="form-control rounded block" 
-            placeholder="Masukan nama musik"
-            type="text"/>
+                onKeyUp={handleTyping}
+                name="searchbar" 
+                className="form-control rounded block max-w-xs" 
+                placeholder="Masukan nama musik"
+                type="text"/>
             <button
             onClick={handleClick} 
-             className="bg-black text-white p-3 rounded">Cari</button>
+            className="bg-black text-white p-3 rounded">Cari</button>
         </div>
     )
 }
