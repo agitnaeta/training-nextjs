@@ -38,13 +38,13 @@ function Playing({text,activeSong}){
 
 function ImageSong({songImages}){
     return (
-        <Carousel dynamicHeight={true} className="bg-red-300" autoPlay={true}>
+        <Carousel dynamicHeight={true} className="" autoPlay={true}>
             {songImages.map((imageSong,index)=>(
                 <div key={index}>
                     <Image 
                     alt="Image"
-                    // height={imageSong.height} 
-                    // width={imageSong.width} 
+                    height={imageSong.height} 
+                    width={imageSong.width} 
                     src={imageSong.url} />
                 </div>
             ))}
