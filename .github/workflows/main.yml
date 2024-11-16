@@ -14,14 +14,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v4
+
       - name: Create .env file
         run: |
           echo "NEXT_PUBLIC_API_KEY = ${{ secrets.HOST_IP }}" | sudo tee -a .env
           echo "NEXT_PUBLIC_API_HOST = ${{ secrets.HOST_IP }}" | sudo tee -a .env
           cat .env
           ls -lath
-
-      - uses: actions/checkout@v4
 
       - name: Install yarn
         run: |
