@@ -1,0 +1,51 @@
+name: npm
+
+on:
+  push:
+    branches: ["next"]
+  pull_request:
+    branches: ["next"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_API_KEY = ${{ secrets.HOST_IP }}" | sudo tee -a .env
+          echo "NEXT_PUBLIC_API_HOST = ${{ secrets.HOST_IP }}" | sudo tee -a .env
+          cat .env
+
+      - name: Install yarn
+        run: npm -g yarn
+
+      - name: Yarn build
+        run: yarn build
+
+      - name: Compress project file
+        run: tar -czvf ./project.tar.gz ./app
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          name: github
+          key: ${{ secrets.ID_RSA_PRIVATE }}
+          known_hosts: ${{ secrets.HOST_IP }}
+
+      - name: SSH Keyscan
+        run: |
+          ssh-keyscan -p 22 -H ${{ secrets.HOST_IP }}  >> ~/.ssh/known_hosts
+
+      - name: Copy file
+        run: |
+          scp -i ~/.ssh/github ./bash.sh ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST_IP }}:/home/${{ secrets.HOST_USERNAME }}/artifact
+          scp -i ~/.ssh/github ./deploy.yml ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST_IP }}:/home/${{ secrets.HOST_USERNAME }}/artifact
+          scp -i ~/.ssh/github ./project.tar.gz ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST_IP }}:/home/${{ secrets.HOST_USERNAME }}/artifact
+
+      - name: Run Ansible
+        run: |
+          ssh -i ~/.ssh/github  ${{ secrets.HOST_USERNAME }}@${{ secrets.HOST_IP }} 'bash -s < /artifcat/bash.sh'

@@ -1,0 +1,33 @@
+---
+- name: Update and extract file
+  hosts: localhost
+  become: true # Use sudo privileges if required
+  tasks:
+    - name: Remove old folder
+      ansible.builtin.file:
+        path: /var/www/training-nextjs
+        state: absent
+
+    - name: Create a new folder
+      ansible.builtin.file:
+        path: /var/www/training-nextjs
+        state: directory
+        mode: "0755"
+
+    - name: Copy tar.gz file to the project directory
+      ansible.builtin.copy:
+        src: project.tar.gz
+        dest: /var/www/project/project.tar.gz
+        mode: "0644"
+
+    - name: Extract the tar.gz file
+      ansible.builtin.unarchive:
+        src: /var/www/project/project.tar.gz
+        dest: /var/www/project/
+        remote_src: yes
+        extra_opts: [--overwrite]
+
+    - name: Remove the tar.gz file after extraction
+      ansible.builtin.file:
+        path: /var/www/project/project.tar.gz
+        state: absent
