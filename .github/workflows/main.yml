@@ -21,6 +21,8 @@ jobs:
           cat .env
           ls -lath
 
+      - uses: actions/checkout@v4
+
       - name: Install yarn
         run: npm install -g yarn
 
