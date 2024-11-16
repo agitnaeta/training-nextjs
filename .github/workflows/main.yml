@@ -24,7 +24,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Yarn build
-        run: yarn build
+        run: cd app && yarn build
 
       - name: Compress project file
         run: tar -czvf ./project.tar.gz ./app
