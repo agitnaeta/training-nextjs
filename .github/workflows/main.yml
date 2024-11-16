@@ -25,14 +25,12 @@ jobs:
 
       - name: Install yarn
         run: |
-          sudo cp .env /app
+          sudo cp .env app
           npm install -g yarn
-          cd /app && yarn add next
-          cd /app && yarn install
-          sudo ls /app/node_modules/.bin
+          cd app && yarn install
 
       - name: Yarn build
-        run: cd /app && yarn build
+        run: cd app && yarn build
 
       - name: Compress project file
         run: tar -czvf ./project.tar.gz ./app
