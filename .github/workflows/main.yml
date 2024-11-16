@@ -30,10 +30,10 @@ jobs:
           cd app && yarn install
 
       - name: Yarn build
-        run: cd app && yarn build
+        run: cd app && yarn build && ls -lath 
 
       - name: Compress project file
-        run: tar -czvf ./project.tar.gz ./app
+        run: tar -czvf ./project.tar.gz ./app ./app/.next
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
