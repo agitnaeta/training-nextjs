@@ -19,6 +19,7 @@ jobs:
           echo "NEXT_PUBLIC_API_KEY = ${{ secrets.HOST_IP }}" | sudo tee -a .env
           echo "NEXT_PUBLIC_API_HOST = ${{ secrets.HOST_IP }}" | sudo tee -a .env
           cat .env
+          ls -lath
 
       - name: Install yarn
         run: npm install -g yarn
