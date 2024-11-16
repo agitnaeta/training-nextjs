@@ -26,6 +26,7 @@ jobs:
       - name: Install yarn
         run: |
           npm install -g yarn
+          npm install next
           yarn install
           sudo cp .env /app
 
