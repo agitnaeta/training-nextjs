@@ -28,7 +28,7 @@ jobs:
           npm install -g yarn
           yarn add next
           yarn install
-          sudo ls app/node_modules/.bin
+          sudo ls /app/node_modules/.bin
           sudo cp .env /app
 
       - name: Yarn build
