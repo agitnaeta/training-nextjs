@@ -25,9 +25,9 @@ jobs:
 
       - name: Install yarn
         run: |
-        npm install -g yarn
-        yarn install
-        cp .env /app
+          npm install -g yarn
+          yarn install
+          cp .env /app
 
       - name: Yarn build
         run: cd app && yarn build
