@@ -1,0 +1,10 @@
+config:
+  target: "https:${{ secrets.HOST_IP }}" # Replace with your Next.js app URL
+  phases:
+    - duration: 60 # Run the test for 60 seconds
+      arrivalRate: 100 # Simulate 10 users per second
+
+scenarios:
+  - flow:
+      - get:
+          url: "/" # Test the home page
